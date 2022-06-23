@@ -1,0 +1,2 @@
+# newscms
+ownnews
