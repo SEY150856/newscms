@@ -27,7 +27,7 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 // https://news.cctv.com/2019/07/gaiban/cmsdatainterface/page/china_1.jsonp?cb=china
-import { newslist1, newslist2, newslist3, newslist4 } from '../../api/userMG'
+import { newslist1, newslist2, newslist3 } from '../../api/userMG'
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {},
@@ -78,22 +78,6 @@ export default {
         })
       } else if (num == 3) {
         newslist3().then((res) => {
-          for (let i = 0; i < res.data.length; i++) {
-            if (res.data[i]['article_id'].length > 8) {
-              let obj = {
-                ids: res.data[i]['article_id'],
-                title: res.data[i]['title'],
-                imgUrl: res.data[i]['img_url'],
-                more: res.data[i]['description']
-              }
-              this.newslist.push(obj)
-            }
-
-          }
-        })
-      } else if (num == 4) {
-        newslist4().then((res) => {
-          console.log(res)
           for (let i = 0; i < res.data.length; i++) {
             if (res.data[i]['article_id'].length > 8) {
               let obj = {

@@ -5,6 +5,8 @@ import {
 } from './axiosFun';
 
 const baseUrl = 'https://i.news.qq.com/trpc.qqnews_web.pc_base_srv.base_http_proxy/'
+const baseUr2 = 'http://newscms.zyjjzsh.com/index.php?appid=1&appsecret=PHPCMF5CF8908813E36&'
+
 
 // 登录接口
 export const login = (params) => {
@@ -37,7 +39,7 @@ export const userDelete = (params) => {
 
 
 
-//国内新闻
+//首页腾讯新闻
 export const newslist1 = (params) => {
   return axios.get("https://i.news.qq.com/trpc.qqnews_web.kv_srv.kv_srv_http_proxy/list?sub_srv_id=24hours&srv_id=pc&offset=0&limit=20&strategy=1&ext={%22pool%22:[%22top%22],%22is_filter%22:7,%22check_type%22:true}").then(res => res.data)
 };
@@ -51,7 +53,16 @@ export const newslist3 = (params) => {
   return axios.get(`${baseUrl}NinjaPageContentSync?pull_urls=today_topic_2018`).then(res => res.data)
 };
 
-export const newslist4 = (params) => {
-  return axios.get(`${baseUrl}list?sub_srv_id=ent&srv_id=pc&offset=0&limit=20&strategy=1&ext={%22pool%22:[%22hot%22],%22is_filter%22:2,%22check_type%22:true}
-  `).then(res => res.data)
+
+
+
+//cms站内新闻
+export const newslistcms = (url) => {
+  return axios.post(`${baseUr2}${url}`).then(res => res.data)
+};
+
+//内页列表
+
+export const newslistnav = (url) => {
+  return axios.post(`${baseUr2}${url}`).then(res => res.data)
 };

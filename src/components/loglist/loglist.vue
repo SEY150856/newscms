@@ -1,31 +1,20 @@
 <!--  -->
 <template>
-  <div class='head_title'>
-    <div id="topnav">
-      <div class="wrap">
-        <div class="tnlt">欢迎进入访问本站！</div>
+  <ul class="loglist">
+    <li class="con" v-for="(list, key) in newsIndexList" :key="key">
+      <div class="info"> <span class="sn"> <a href="/k67/?shxw/" class="mcolor">{{ list.catname }}</a> </span> </div>
+      <div class="des"> <a href="/k67/?shxw/24.html" class="h2">{{ list.title }}</a> <a href="/k67/?shxw/24.html"
+          class="pic"> <img :src="list.thumb" :data-original="list.thumb" :title="list.title" style="display: inline;">
+        </a>
+        <p class="text">
+          {{ list.description }}
+        </p>
+        <p class="tags">发布于：{{ list.updatetime }}</p>
       </div>
-    </div>
-    <div id="mainav">
-      <div class="navbox">
-        <div class="wrap">
-          <div class="mlogo"> <a class="lvxv--logowz"> <img src="../../assets/1636440424885425.png"> </a> </div>
-          <div class="topmenu">
-            <ul class="bar">
-              <li class="item common">
-                <router-link to="/">网站首页</router-link><i class="dot"></i>
-              </li>
-              <li v-for="(item, key) in headTitle" :key="key" class="item common"> <a
-                  @click="goTOpath(item)">{{ item.name }}</a> <i class="dot"></i> </li>
-            </ul>
-          </div>
-          <i class="fa fa-navicon"></i>
-        </div>
+      <a href="/k67/?shxw/24.html" class="more">详细阅读<i class="fa fa-angle-right"></i></a>
+    </li>
+  </ul>
 
-      </div>
-
-    </div>
-  </div>
 </template>
 
 <script>
@@ -34,13 +23,13 @@
 import { newslistcms } from '../../api/userMG'
 
 export default {
-  name: 'headTitle',
+  name: 'loglist',
   //import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
     //这里存放数据
     return {
-      headTitle: []
+      newsIndexList: []
     };
   },
   //监听属性 类似于data概念
@@ -48,17 +37,18 @@ export default {
   //监控data中的数据变化
   watch: {},
   //方法集合
+  props: {
+
+  },
   methods: {
-    goTOpath(item) {
-      this.$router.push({ name: 'newslist', params: { id: item.childids } })
-    }
+
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    var url = 's=httpapi&m=category&mid=share&pid=1'
-    newslistcms(url).then((res) => {
-      this.headTitle = res.data
-      console.log(this.headTitle)
+    let indexurl = 's=news&c=search&api_call_function=module_list'
+    newslistcms(indexurl).then((res) => {
+      this.newsIndexList = res.data
+      console.log(this.newsIndexList)
     })
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
